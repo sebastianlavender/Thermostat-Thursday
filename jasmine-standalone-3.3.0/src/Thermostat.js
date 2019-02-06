@@ -1,15 +1,16 @@
 function Thermostat() {
-  this.temperature = defaultTemp
+  this.DEFAULT_TEMP = 20
+  this.temperature = this.DEFAULT_TEMP
   this.powerSaving = true
+  this.MAX_PSM_ON = 25
+  this.MAX_PSM_OFF = 32
 }
-
-const defaultTemp= 20
 
 Thermostat.prototype.up = function (amount) {
   if (this.powerSaving === true) {
-    this._increase(amount, 25)
+    this._increase(amount, this.MAX_PSM_ON)
   } else {
-    this._increase(amount, 32)
+    this._increase(amount, this.MAX_PSM_OFF)
   }
 };
 
@@ -30,11 +31,11 @@ Thermostat.prototype._increase = function(amount, number) {
 };
 
 Thermostat.prototype.reset = function () {
-  this.temperature = defaultTemp
+  this.temperature = this.DEFAULT_TEMP
 };
 
 Thermostat.prototype.usage = function () {
   if(this.temperature < 18) { return 'low' } else
-  if (this.temperature >= 25) { return 'high' } else 
+  if (this.temperature >= 25) { return 'high' } else
   return 'medium'
 };

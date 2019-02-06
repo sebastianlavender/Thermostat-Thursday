@@ -5,7 +5,7 @@ describe("Thermostat", function() {
   });
 
   it('should initialize with 20 degrees', function() {
-    expect(thermostat.temperature).toEqual(defaultTemp)
+    expect(thermostat.temperature).toEqual(thermostat.DEFAULT_TEMP)
   });
 
   it('should increase the temp by a chosen amount', function(){
@@ -52,7 +52,7 @@ describe("Thermostat", function() {
     it('should reset the temperature to 20', function(){
     thermostat.up(5);
     thermostat.reset();
-    expect(thermostat.temperature).toEqual(defaultTemp);
+    expect(thermostat.temperature).toEqual(thermostat.DEFAULT_TEMP);
     });
   });
 
