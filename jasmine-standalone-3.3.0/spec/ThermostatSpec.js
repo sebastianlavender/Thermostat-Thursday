@@ -5,7 +5,7 @@ describe("Thermostat", function() {
   });
 
   it('should initialize with 20 degrees', function() {
-    expect(thermostat.temperature).toEqual(20)
+    expect(thermostat.temperature).toEqual(defaultTemp)
   });
 
   it('should increase the temp by a chosen amount', function(){
@@ -36,7 +36,7 @@ describe("Thermostat", function() {
 
     it('should have max temp of 32 if power saving is off', function(){
       thermostat.powerSavingOff();
-      thermostat.up(13); 
+      thermostat.up(13);
       expect(thermostat.temperature).toEqual(32);
     });
   });
@@ -45,6 +45,15 @@ describe("Thermostat", function() {
     thermostat.powerSavingOff();
     thermostat.powerSavingOn();
     expect(thermostat.powerSaving).toEqual(true);
+  });
+
+  describe("reset", function() {
+
+    it('should resest the temperature to 20', function(){
+    thermostat.up(5);
+    thermostat.reset();
+    expect(thermostat.temperature).toEqual(defaultTemp);
+    });
   });
 
 

@@ -1,7 +1,9 @@
 function Thermostat() {
-  this.temperature = 20
+  this.temperature = defaultTemp
   this.powerSaving = true
 }
+
+const defaultTemp= 20
 
 Thermostat.prototype.up = function (amount) {
   if (this.powerSaving === true) {
@@ -26,4 +28,8 @@ Thermostat.prototype.powerSavingOn = function () {
 
 Thermostat.prototype._increase = function(amount, number) {
   (this.temperature + amount) <= number ? this.temperature += amount : this.temperature = number
+};
+
+Thermostat.prototype.reset = function () {
+  this.temperature = defaultTemp
 };
