@@ -49,12 +49,30 @@ describe("Thermostat", function() {
 
   describe("reset", function() {
 
-    it('should resest the temperature to 20', function(){
+    it('should reset the temperature to 20', function(){
     thermostat.up(5);
     thermostat.reset();
     expect(thermostat.temperature).toEqual(defaultTemp);
     });
   });
 
+  describe("usage", function() {
+    it('should return low usage if temp is under 18', function(){
+      thermostat.down(3);
+      expect(thermostat.usage()).toEqual("low");
+    });
+
+    it('should return medium usage if temp between 18 and 24 inclusive', function(){
+      thermostat.down(2)
+      expect(thermostat.usage()).toEqual("medium");
+      thermostat.up(6)
+      expect(thermostat.usage()).toEqual("medium");
+    });
+
+    it('should return low usage if temp is 25 or more', function(){
+      thermostat.up(5);
+      expect(thermostat.usage()).toEqual("high");
+    });
+  });
 
 });

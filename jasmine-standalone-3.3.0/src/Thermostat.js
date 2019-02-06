@@ -25,11 +25,16 @@ Thermostat.prototype.powerSavingOn = function () {
     this.powerSaving = true
 };
 
-
 Thermostat.prototype._increase = function(amount, number) {
   (this.temperature + amount) <= number ? this.temperature += amount : this.temperature = number
 };
 
 Thermostat.prototype.reset = function () {
   this.temperature = defaultTemp
+};
+
+Thermostat.prototype.usage = function () {
+  if(this.temperature < 18) { return 'low' } else
+  if (this.temperature >= 25) { return 'high' } else 
+  return 'medium'
 };
