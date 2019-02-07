@@ -6,28 +6,29 @@ function Thermostat() {
   this.MAX_PSM_OFF = 32
 }
 
-Thermostat.prototype.up = function (amount) {
+Thermostat.prototype.up = function () {
   if (this.powerSaving === true) {
-    this._increase(amount, this.MAX_PSM_ON)
+    this._increase(this.MAX_PSM_ON)
   } else {
-    this._increase(amount, this.MAX_PSM_OFF)
+    this._increase(this.MAX_PSM_OFF)
   }
 };
 
-Thermostat.prototype.down = function (amount) {
-  (this.temperature - amount) >= 10 ? this.temperature -= amount : this.temperature = 10
+Thermostat.prototype.down = function () {
+  (this.temperature - 1) >= 10 ? this.temperature -= 1 : this.temperature = 10
 };
 
 Thermostat.prototype.powerSavingOff = function () {
-    this.powerSaving = false
+    this.powerSaving = false;
 };
 
 Thermostat.prototype.powerSavingOn = function () {
-    this.powerSaving = true
+    if (this.temperature > 25) { this.temperature = 25 };
+    this.powerSaving = true;
 };
 
-Thermostat.prototype._increase = function(amount, number) {
-  (this.temperature + amount) <= number ? this.temperature += amount : this.temperature = number
+Thermostat.prototype._increase = function(number) {
+  (this.temperature + 1) <= number ? this.temperature += 1 : this.temperature = number
 };
 
 Thermostat.prototype.reset = function () {

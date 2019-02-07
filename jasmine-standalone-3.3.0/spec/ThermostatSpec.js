@@ -8,23 +8,27 @@ describe("Thermostat", function() {
     expect(thermostat.temperature).toEqual(thermostat.DEFAULT_TEMP)
   });
 
-  it('should increase the temp by a chosen amount', function(){
-    thermostat.up(5)
-    expect(thermostat.temperature).toEqual(25)
+  it('should increase the temp', function(){
+    thermostat.up()
+    expect(thermostat.temperature).toEqual(21)
   });
 
   it('should decrease the temp by a chosen amount', function(){
-    thermostat.down(10);
-    expect(thermostat.temperature).toEqual(10);
+    thermostat.down();
+    expect(thermostat.temperature).toEqual(19);
   })
 
   it('should not decrease below 10 degrees', function() {
-    thermostat.down(11);
+    for (var i = 0; i < 12; i++) {
+    thermostat.down();
+    };
     expect(thermostat.temperature).toEqual(10);
   });
 
   it('should limit temp to 25 if power saving is on', function() {
-    thermostat.up(10);
+    for (var i = 0; i < 7; i++) {
+    thermostat.up();
+    };
     expect(thermostat.temperature).toEqual(25);
   })
 
@@ -36,7 +40,9 @@ describe("Thermostat", function() {
 
     it('should have max temp of 32 if power saving is off', function(){
       thermostat.powerSavingOff();
-      thermostat.up(13);
+      for (var i = 0; i < 14; i++) {
+      thermostat.up();
+      };
       expect(thermostat.temperature).toEqual(32);
     });
   });
@@ -58,19 +64,27 @@ describe("Thermostat", function() {
 
   describe("usage", function() {
     it('should return low usage if temp is under 18', function(){
-      thermostat.down(3);
+      for (var i = 0; i < 3; i++) {
+      thermostat.down();
+      };
       expect(thermostat.usage()).toEqual("low");
     });
 
     it('should return medium usage if temp between 18 and 24 inclusive', function(){
-      thermostat.down(2)
+      for (var i = 0; i < 2; i++) {
+      thermostat.down()
+      };
       expect(thermostat.usage()).toEqual("medium");
-      thermostat.up(6)
+      for (var i = 0; i < 6; i++) {
+      thermostat.up();
+      };
       expect(thermostat.usage()).toEqual("medium");
     });
 
-    it('should return low usage if temp is 25 or more', function(){
-      thermostat.up(5);
+    it('should return high usage if temp is 25 or more', function(){
+      for (var i = 0; i < 7; i++) {
+      thermostat.up();
+      };
       expect(thermostat.usage()).toEqual("high");
     });
   });
