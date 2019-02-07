@@ -11,23 +11,35 @@
     <title>Thermostat</title>
   </head>
   <body>
-  <div class="row">
-    <div class="column" style="text-align: right">
-      <p id="temp">
-      </p>
-    </div>
+
+  <div class="container">
+  <div class="white">
+      <p id="temp" align="right"></p>
     <div class="column" id="buttons" style=" text-align: left">
+      <button id="reset">Reset</button>
       <button id="increaseTempSelect">+</button>
       <button id="decreaseTempSelect">-</button>
-      <br>
-      <button id="powerSaving" style="background-color: green">
+      <button id="powerSaving">
       <span class="ui-button-text">Power Saving On</span>
       </button>
       <br>
-      <button id="reset">Reset</button>
-      <p id='outside-temp'></p>
+
+
+      <form id="select-city">
+        <p id='outside-temp'>Current temperature: <span id="current-temperature">20</span></p>
+        <input id='city-submit' type="submit"></input>
+        <input id="current-city" type="text" placeholder="Enter a city"></input>
+      </form>
+
+     <p id='outside-temp'></p>
     </div>
   </div>
 
+
+  <div class="black">
+      <h1 id="degrees">Degrees</h1>
+
+  </div>
+</div>
   </body>
 </html>

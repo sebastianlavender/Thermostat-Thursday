@@ -1,15 +1,22 @@
-const weatherAPI = 'https://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=f01f3c1b75b7905650b3dd36ec80b41d'
 
-function getWeather() {
-  $.getJSON(weatherAPI).then( function(data) {
-    console.log(data.main.temp)
-  })
+function displayWeather(city) {
+var url = 'http://api.openweathermap.org/data/2.5/weather?q=' + city;
+var token = '&appid=a3d9eb01d4de82b9b8d0849ef604dbed';
+var units = '&units=metric';
+$.get(url + token + units, function(data) {
+  $('#current-temperature').text(Math.round(data.main.temp));
+})
 }
 
 $(document).ready(function() {
   let thermostat = new Thermostat();
+  displayWeather('London')
 
-  $('#outside-temp').text(getWeather());
+  $('#city-submit').click(function(event) {
+   event.preventDefault();
+   var city = $('#current-city').val();
+   displayWeather(city)
+  })
 
   $('#temp').text(thermostat.temperature);
 
@@ -17,7 +24,7 @@ $(document).ready(function() {
     thermostat.reset()
     $('#temp').text(thermostat.temperature);
     if (thermostat.usage() === "low") {$("#temp").css("color","green")} else
-    if (thermostat.usage() === "medium") {$("#temp").css("color","black")} else
+    if (thermostat.usage() === "medium") {$("#temp").css("color","#CA5231")} else
     $("#temp").css("color","red");
   });
 
@@ -25,7 +32,7 @@ $(document).ready(function() {
     thermostat.up();
     $('#temp').text(thermostat.temperature);
     if (thermostat.usage() === "low") {$("#temp").css("color","green")} else
-    if (thermostat.usage() === "medium") {$("#temp").css("color","black")} else
+    if (thermostat.usage() === "medium") {$("#temp").css("color","#CA5231")} else
     $("#temp").css("color","red");
   });
 
@@ -33,7 +40,7 @@ $(document).ready(function() {
     thermostat.down();
     $('#temp').text(thermostat.temperature);
     if (thermostat.usage() === "low") {$("#temp").css("color","green")} else
-    if (thermostat.usage() === "medium") {$("#temp").css("color","black")} else
+    if (thermostat.usage() === "medium") {$("#temp").css("color","#CA5231")} else
     $("#temp").css("color","red");
   });
 
